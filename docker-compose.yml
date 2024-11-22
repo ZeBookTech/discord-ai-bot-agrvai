@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  bot:
+    image: seu_bot_image
+    networks:
+      - ZeNET
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.bot.rule=Host(`bot.seudominio.com`)"
+      - "traefik.http.routers.bot.entrypoints=websecure"
+      - "traefik.http.routers.bot.tls.certresolver=letsencryptresolver"
+    restart: unless-stopped
+    environment:
+      - TZ=America/Sao_Paulo
+
+networks:
+  ZeNET:
+    external: true
